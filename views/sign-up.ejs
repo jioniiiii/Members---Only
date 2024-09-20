@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Sign-Up</title>
+</head>
+<body>
+  <% if (errors.length > 0) { %>
+    <%- include('partial/error', { errors: errors }) %>
+  <% } %>
+    <div class="container">
+      <h1>Sign Up</h1>
+      <form action="/sign-up" method="POST" class="form">
+
+          
+          <label for="first_name">First Name</label>
+          <input type="text" id="first_name" name="first_name" placeholder="Enter your first name">
+          
+   
+          <label for="last_name">Last Name</label>
+          <input type="text" id="last_name" name="last_name" placeholder="Enter your last name">
+       
+        
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username">
+        
+          <input type="password" id="password" name="password" placeholder="Enter a password" 
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+          title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one digit." 
+          required>
+       
+ 
+          <label for="confirm_password">Confirm Password</label>
+          <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password">
+       
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </body>
+  </html>

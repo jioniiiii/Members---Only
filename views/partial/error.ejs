@@ -1,0 +1,8 @@
+<div class="error-container">
+  <% errors.forEach(error => { %>
+    <div class="error-message">
+      <span><%= error.msg %></span>
+      <button class="close-button" onclick="this.parentElement.style.display='none'">Close</button>
+    </div>
+  <% }) %>
+</div>

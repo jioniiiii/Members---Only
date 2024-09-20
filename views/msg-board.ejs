@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Board</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container-board">
+    <div class="user">
+      <div class="user-info">
+        <h1><% if (user) { %>
+          Hello, <%= user.username %>!</h1>
+        <p ><i>( <%= user.mem_status %> )</i></p>
+        <% } else { %>
+          <h1>Hello, there</h1>
+          <% } %>
+      </div>
+      <% if (user) { %>
+        <a href="/log-out" class="add-msg-btn">Log Out</a>
+      <% } else { %>
+        <a href="/log-in" class="add-msg-btn">Log In</a>
+        <% } %>
+    </div>
+      <% if (user) { %>
+        <div style="display: flex;justify-content: center;">
+          <a href="/add-msg" class="add-msg-btn">Add Message</a>
+        </div>
+      <% } %>
+    <ul class="message-list">
+      <% messages.forEach(message => { %>
+        <li class="msg-cont">
+          <div class="msg-header">
+            <span class="user-id"><% if (!user) { %>
+              Anonymous
+              <% } else if (user.username === message.username) { %>
+              • You 
+              <% } else { %>
+              • <%= message.username %>  
+              <% } %></span>
+            <span class="created-at">Posted: <%= message.created_at.toISOString().split('T')[0] %></span>
+          </div>
+          <h2 class="msg-title"><%= message.title %></h2>
+          <p class="msg-text"><%= message.text %></p>
+          <% if (user && user.mem_status === 'admin') { %>
+            <form action="/delete-msg/<%= message.id %>" method="POST">
+              <button type="submit" class="delete-btn">Delete</button>
+            </form>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>
